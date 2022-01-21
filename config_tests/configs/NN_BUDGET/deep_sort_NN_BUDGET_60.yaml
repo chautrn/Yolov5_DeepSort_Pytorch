@@ -1,8 +1,8 @@
 DEEPSORT:
     LAMBDA: 0
     MAX_AGE: 70
-    MAX_DIST: 0.1
+    MAX_DIST: 0.2
     MAX_IOU_DISTANCE: 0.7
-    NN_BUDGET: 100
+    NN_BUDGET: 60
     N_INIT: 3
     REID_CKPT: deep_sort_pytorch/deep_sort/deep/checkpoint/ckpt.t7

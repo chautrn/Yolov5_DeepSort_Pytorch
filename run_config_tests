@@ -1,0 +1,29 @@
+#!/bin/bash
+
+CONFIG_DIR="./config_tests/configs/$1"
+OUTPUT="./config_tests/results/$1"
+FILES=`ls $CONFIG_DIR`
+
+count=0
+for f in $FILES
+do
+	config="$CONFIG_DIR/$f"
+	name=$(echo $f | grep -oP "[0-9]\d*(\.\d+)?")
+	execute="python ./track.py --yolo_model ./runs/best.pt \
+--source ./config_tests/data/max_0008_trimmed \
+--conf-thres 0.6 \
+--save-txt \
+--save-vid \
+--config_deepsort $config \
+--name $name \
+--project $OUTPUT &"
+	echo "executing $execute"
+	eval $execute
+	(( count++ ))
+	if [ "$count" -eq "11" ]; then
+		echo "waiting for batch of 11 to finish"
+		eval "wait"
+	fi
+done
+eval "wait"
+echo "done"

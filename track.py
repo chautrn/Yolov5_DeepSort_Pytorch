@@ -50,7 +50,10 @@ def detect(opt):
     deepsort = DeepSort(deep_sort_model,
                         max_dist=cfg.DEEPSORT.MAX_DIST,
                         max_iou_distance=cfg.DEEPSORT.MAX_IOU_DISTANCE,
-                        max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
+                        max_age=cfg.DEEPSORT.MAX_AGE, 
+                        n_init=cfg.DEEPSORT.N_INIT, 
+                        nn_budget=cfg.DEEPSORT.NN_BUDGET,
+                        _lambda=cfg.DEEPSORT.LAMBDA,
                         use_cuda=True)
 
     # Initialize
