@@ -5,5 +5,5 @@ DEEPSORT:
     MIN_CONFIDENCE: 0.3
     NMS_MAX_OVERLAP: 0.5
     NN_BUDGET: 100
-    N_INIT: 14.0
+    N_INIT: 1.0
     REID_CKPT: deep_sort_pytorch/deep_sort/deep/checkpoint/ckpt.t7
