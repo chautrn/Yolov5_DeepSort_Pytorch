@@ -1,0 +1,28 @@
+#!/bin/bash
+
+DIR="/data/drone/tranch29/Yolov5_DeepSort_Pytorch/configs/N_INIT"
+OUTPUT="/data/drone/tranch29/Yolov5_DeepSort_Pytorch/results/N_INIT"
+FILES=`ls $DIR`
+
+count=0
+for f in $FILES
+do
+	config="$DIR/$f"
+	output="$OUTPUT/$f"
+	execute="../python_env/bin/python track.py --yolo_weights ./runs/best.pt \
+--source ./data/max_0008_trimmed \
+--conf-thres 0.6 \
+--save-txt \
+--save-vid \
+--config_deepsort $config \
+--output $output &"
+	echo "executing $execute"
+	eval $execute
+	(( count++ ))
+	if [ "$count" -eq "9" ]; then
+		echo "waiting for batch of 10 to finish"
+		eval "wait"
+	fi
+done
+eval "wait"
+echo "done"
